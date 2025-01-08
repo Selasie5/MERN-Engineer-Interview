@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import BirdTable from '../components/BirdTable'
 import { Bird } from '../types/BirdTypes'
 import { fetchBirds } from '../services/birdService'
+import BirdModal from '../components/BirdModal'
 
 const Dashboard = () => {
     const [birds, setBirds] = useState<Bird[]>([]);
@@ -25,12 +26,21 @@ const Dashboard = () => {
       <h1>Interesting Bird Facts</h1>
      <BirdTable birds={birds}
       onSelectBird={
-        ()=>{
-          
+        (bird)=>{
+          setSelectedBird(bird);
+          setIsDetailModalOpen(true)
         }
       } 
      onUpdateBird={()=>{}}
       onDeleteBird={()=>{}}/>
+
+      {isDetailModalOpen && selectedBird &&(
+        <BirdModal
+        bird={selectedBird}
+        onClose={()=>setIsDetailModalOpen(false)}
+        />
+
+      )}
     </div>
   )
 }
