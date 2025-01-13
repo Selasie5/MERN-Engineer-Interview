@@ -19,14 +19,14 @@ export const getBirdById=async(id:string) :Promise<Bird[]>=>
     }
 
 //Create A Bird
-export const createBird=async() :Promise<Bird>=>
+export const createBird=async(bird:Bird) :Promise<Bird>=>
     {
-        const response = await axios.post(`${API_URL}`,bird);
+        const response = await axios.post(API_URL,bird);
         return response.data;
     }
 
     //Update A bird
-    export const UpdateBirds=async(id:string)=>
+    export const UpdateBirds=async(id:string, bird:Omit<Bird, 'id'>):Promise<Bird>=>
         {
             const response = await axios.put(`${API_URL}/${id}`, bird);
             return response.data;
